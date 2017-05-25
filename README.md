@@ -13,7 +13,8 @@ used on my [futures.io](http://futures.io) webinars series on **Trading with Pyt
 1. Prototyping Trading Strategies -
 [ [jupyter notebook](https://github.com/ranaroussi/futuresio-webinars/blob/master/01-prototyping-trading-strategies.ipynb) |
 [webinar recording](https://www.youtube.com/watch?v=amV0G11symc&index=1&list=PL3h-pf1ScFPLmB4P7V8FRnSYoN1o7wEde) ]
-2. Backtesting & Optimization - [ [jupyter notebook](https://github.com/ranaroussi/futuresio-webinars/blob/master/02-backtesting-and-optimization.ipynb) | webinar recording ]
+2. Backtesting & Optimization - [ [jupyter notebook](https://github.com/ranaroussi/futuresio-webinars/blob/master/02-backtesting-and-optimization.ipynb) |
+[webinar recording](https://www.youtube.com/watch?v=uD4nokfTnAs&list=PL3h-pf1ScFPLmB4P7V8FRnSYoN1o7wEde&index=2) ]
 3. Live Trading (TBA)
 3. Using Machine Learning in Trading (TBA)
 
