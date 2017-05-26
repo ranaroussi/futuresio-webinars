@@ -2,7 +2,7 @@
 
 ### Welcome!
 
-[<img src="https://img.shields.io/github/stars/ranaroussi/fix-yahoo-finance.svg?style=social&label=Star&maxAge=60">](https://github.com/ranaroussi/futuresio-webinars)
+[<img src="https://img.shields.io/github/stars/ranaroussi/futuresio-webinars.svg?style=social&label=Star&maxAge=60">](https://github.com/ranaroussi/futuresio-webinars)
 [<img src="https://img.shields.io/twitter/follow/aroussi.svg?style=social&label=Follow%20Me&maxAge=60">](https://twitter.com/aroussi)
 
 This repository contains supported files and code examples
