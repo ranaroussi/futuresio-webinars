@@ -215,19 +215,19 @@ def colormap3d(x, y, z,
     plt.show()
 
 
-def iterate(df, progress=True):
+def iterate(df, skip=1, progress=True):
     """
     example:
-    for rows in drip_data(df):
+    for idx, loc in atw.iterate(df):
         print(line)
     """
     if progress:
         pbar = ProgressBar(len(df))
 
-    for ix, _ in df.iterrows():
-        loc = df.index.get_loc(ix)
-        if loc > 0:
-            yield ix, loc
+    for idx, _ in df.iterrows():
+        loc = df.index.get_loc(idx)
+        if loc >= skip:
+            yield idx, loc
         if progress:
             pbar.animate()
             time.sleep(0.000001)
