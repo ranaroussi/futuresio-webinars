@@ -16,7 +16,7 @@ used on my [futures.io](http://futures.io) webinars series on **Trading with Pyt
 2. Backtesting & Optimization - [ [jupyter notebook](https://github.com/ranaroussi/futuresio-webinars/blob/master/02-backtesting-and-optimization.ipynb) |
 [webinar recording](https://www.youtube.com/watch?v=uD4nokfTnAs&list=PL3h-pf1ScFPLmB4P7V8FRnSYoN1o7wEde&index=2) ]
 3. Live Trading - [ [jupyter notebook](https://github.com/ranaroussi/futuresio-webinars/blob/master/03-live-trading.ipynb) |
-webinar recording ]
+[webinar recording](https://www.youtube.com/watch?v=fE1Op4Egi34&list=PL3h-pf1ScFPLmB4P7V8FRnSYoN1o7wEde&index=3) ]
 3. Using Machine Learning in Trading (TBA)
 
 **\*** The recordings of the webinars can be found this [futures.io YouTube playlist](https://www.youtube.com/watch?v=amV0G11symc&list=PL3h-pf1ScFPLmB4P7V8FRnSYoN1o7wEde).
