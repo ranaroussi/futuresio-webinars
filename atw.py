@@ -19,22 +19,27 @@
 # limitations under the License.
 
 
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
-from matplotlib.ticker import LinearLocator, FormatStrFormatter
-import seaborn as sns
 import sys
 import time
 import datetime
 
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
 from matplotlib import gridspec
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib.ticker import LinearLocator, FormatStrFormatter
 import matplotlib.dates as mdates
 try:
     from mpl_finance import candlestick_ohlc
 except ImportError:
     from matplotlib.finance import candlestick_ohlc
+
+
+def compsum(df):
+    return (1 + df).cumprod() - 1
 
 
 def train_test_split(df, test_size=.2):
@@ -78,7 +83,7 @@ def subplot(dfs, title="", upper_plot_ratio=3, figsize=None, *args, **kwargs):
     return fig
 
 
-def plot_candlestick(df, ax=None, fmt="%Y-%m-%d", cols=["open", "high", "low", "close"]):
+def plot_candlestick(df, ax=None, fmt="%Y-%m-%d", cols=("open", "high", "low", "close")):
     if ax is None:
         fig, ax = plt.subplots()
 
@@ -102,11 +107,9 @@ def sharpe(returns, riskfree=0, periods=252):
         return 0.
 
 def cagr(returns):
-    start_value = 1
-    end_value = 1 + sum(returns)
-    years = len(returns.resample("A").count())
-    return ((end_value / start_value) ** (1 / years)) - 1
-
+    years = ((returns.index.max() - returns.index.min()).days)/365
+    roi = 1 + compsum(returns).values[-1]
+    return roi ** (1 / years) - 1.
 
 def win_rate(returns):
     returns.fillna(0, inplace=True)
@@ -143,10 +146,10 @@ def profit_factor(returns):
 
 
 def drawdown(returns, daily=False):
-    cumret = returns.fillna(0).cumsum()
-
     if daily:
-        cumret = cumret.resample("D").last().ffill()
+        returns = returns.resample("D").sum()
+
+    cumret = returns.fillna(0)
 
     dd = pd.DataFrame(index=cumret.index, data={"percent": cumret.fillna(0)})
     dd['duration'] = np.where(dd['percent'] < 0, 1, 0)
@@ -399,7 +402,7 @@ def montecarlo(series, sims=100, bust=-1, goal=0):
     })
 
 
-def monthly_returns_heatmap(returns,
+def monthly_returns(returns,
                             title="Monthly Returns (%)",
                             title_color="black",
                             title_size=12,
@@ -428,12 +431,33 @@ def monthly_returns_heatmap(returns,
     # make pivot table
     returns = returns.pivot('Year', 'Month', 'Returns').fillna(0)
 
+    # add missing months
+    for month in ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                       'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']:
+        if month not in returns.columns:
+            returns.loc[:, month] = 0
+
     # order columns by month
     returns = returns[['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
                        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']]
 
     returns *= 100
 
+    return returns
+
+
+def monthly_returns_heatmap(returns,
+                            title="Monthly Returns (%)",
+                            title_color="black",
+                            title_size=12,
+                            annot_size=10,
+                            figsize=None,
+                            cmap='RdYlGn',
+                            cbar=True,
+                            square=False):
+
+    returns = monthly_returns(returns, title, title_color, title_size,
+                            annot_size, figsize, cmap, cbar, square)
     if figsize is None:
         size = list(plt.gcf().get_size_inches())
         figsize = (size[0], size[0] // 2)
